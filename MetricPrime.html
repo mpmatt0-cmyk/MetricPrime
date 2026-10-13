@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetricPrime | Automated Reputation Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#030712', // Ultra dark slate
+                        surface: '#0f172a',
+                        surfaceLight: '#1e293b',
+                        primary: '#3b82f6', // Blue
+                        accent: '#06b6d4', // Cyan
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #030712;
+            color: #f8fafc;
+        }
+        /* High-tech CSS Grid Background */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-accent selection:text-background relative">
+
+    <!-- Global Grid Background -->
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+
+    <!-- Floating Navbar -->
+    <div class="fixed top-6 left-0 right-0 z-50 px-4 pointer-events-none">
+        <nav class="max-w-5xl mx-auto glass-panel rounded-full px-6 py-3 flex justify-between items-center shadow-[0_8px_32px_rgba(0,0,0,0.4)] pointer-events-auto transition-all border-t border-white/10" data-aos="fade-down" data-aos-duration="800">
+            <div class="flex items-center space-x-3.5 cursor-pointer group">
+                <!-- Scaled up logo icon -->
+                <img src="MetricPrimeLogo.png" alt="MetricPrime Logo" class="h-12 md:h-14 w-auto object-contain filter invert opacity-95 group-hover:opacity-100 transition-opacity">
+                <span class="font-bold text-2xl tracking-tight text-white">MetricPrime</span>
+            </div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#how-it-works" class="text-sm font-medium text-slate-400 hover:text-accent transition-colors">How It Works</a>
+                <a href="#benefits" class="text-sm font-medium text-slate-400 hover:text-accent transition-colors">Benefits</a>
+                <a href="#pricing" class="text-sm font-medium text-slate-400 hover:text-accent transition-colors">Pricing</a>
+            </div>
+            <a href="#pricing" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2.5 rounded-full text-sm font-semibold transition-all backdrop-blur-md hover:shadow-[0_0_20px_rgba(6,182,212,0.3)]">Get Started</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-48 pb-32 z-10 overflow-hidden">
+        <!-- Glowing Orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-slow pointer-events-none"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse-slow pointer-events-none" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+            <!-- Business Badge -->
+            <div data-aos="fade-up" class="inline-flex items-center space-x-2 glass-panel px-4 py-1.5 rounded-full mb-8 border border-accent/30 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                <span class="text-xs font-bold text-accent uppercase tracking-wider">Zero Admin Work Required</span>
+            </div>
+
+            <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight mb-8 leading-[1.1]" data-aos="fade-up" data-aos-delay="100">
+                Turn Finished Jobs <br class="hidden md:block">
+                <span class="text-gradient">Into New Leads.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                A seamless pipeline from the job site to your Google Business Profile. Your crew snaps a photo, and our tool automatically generates updates, requests reviews, and responds to customers. 
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6" data-aos="fade-up" data-aos-delay="300">
+                <a href="#pricing" class="w-full sm:w-auto bg-accent hover:bg-cyan-400 text-background font-bold py-4 px-10 rounded-xl transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transform hover:-translate-y-1">
+                    View Plans
+                </a>
+                <a href="#how-it-works" class="w-full sm:w-auto glass-panel text-white font-semibold py-4 px-10 rounded-xl transition-all hover:bg-white/10 flex items-center justify-center">
+                    See How It Works
+                </a>
+            </div>
+        </div>
+
+        <!-- Clean Dashboard Graphic Mockup -->
+        <div class="mt-20 max-w-4xl mx-auto px-4 relative z-10" data-aos="fade-up" data-aos-delay="500">
+            <div class="glass-panel rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden animate-float p-2">
+                <div class="bg-surface rounded-xl border border-slate-800 h-12 flex items-center px-4 space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-slate-600"></div>
+                    <div class="w-3 h-3 rounded-full bg-slate-600"></div>
+                    <div class="w-3 h-3 rounded-full bg-slate-600"></div>
+                    <div class="ml-4 font-semibold text-sm text-slate-400">MetricPrime Activity Dashboard</div>
+                </div>
+                <div class="p-8 bg-gradient-to-br from-surface to-background border-t border-slate-800">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700/50">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">✓</div>
+                            <div>
+                                <p class="text-white font-semibold">Photo uploaded from job site</p>
+                                <p class="text-slate-400 text-sm">Just now by field crew</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700/50">
+                            <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">✓</div>
+                            <div>
+                                <p class="text-white font-semibold">Google Business Post drafted</p>
+                                <p class="text-slate-400 text-sm">Automated project summary generated</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 rounded-lg bg-slate-800/50 border border-slate-700/50">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">★</div>
+                            <div>
+                                <p class="text-white font-semibold">5-Star Review Replied</p>
+                                <p class="text-slate-400 text-sm">Automatically thanked customer for feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Steps (How it works) -->
+    <section id="how-it-works" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 text-center" data-aos="fade-up">
+                <h2 class="text-sm font-bold text-accent tracking-widest uppercase mb-3">Hands-Free Growth</h2>
+                <h3 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Three Steps to an Active Profile.</h3>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Box 1 -->
+                <div class="md:col-span-1 glass-panel p-8 rounded-3xl border border-slate-700/50 hover:border-primary/50 transition-colors group relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[40px] group-hover:bg-primary/20 transition-all"></div>
+                    <div class="w-12 h-12 bg-surface rounded-xl flex items-center justify-center border border-slate-700 mb-6 text-primary font-bold text-xl">1</div>
+                    <h4 class="text-xl font-bold text-white mb-3">The Field Upload</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Your crew takes a quick photo of the finished job from their phone using a simple web link. No app store downloads required.</p>
+                </div>
+
+                <!-- Box 2 -->
+                <div class="md:col-span-2 glass-panel p-8 rounded-3xl border border-slate-700/50 hover:border-accent/50 transition-colors group relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 left-1/2 w-48 h-48 bg-accent/10 rounded-full blur-[50px] group-hover:bg-accent/20 transition-all"></div>
+                    <div class="w-12 h-12 bg-surface rounded-xl flex items-center justify-center border border-slate-700 mb-6 text-accent font-bold text-xl">2</div>
+                    <h4 class="text-xl font-bold text-white mb-3">AI Processing</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-xl">MetricPrime instantly writes a professional project update for your Google profile and monitors your account for new customer reviews to reply to.</p>
+                </div>
+
+                <!-- Box 3 -->
+                <div class="md:col-span-3 glass-panel p-8 rounded-3xl border border-slate-700/50 hover:border-white/30 transition-colors group relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[60px] pointer-events-none"></div>
+                    <div class="mb-6 md:mb-0 md:mr-8 z-10">
+                        <div class="w-12 h-12 bg-surface rounded-xl flex items-center justify-center border border-slate-700 mb-6 text-white font-bold text-xl">3</div>
+                        <h4 class="text-xl font-bold text-white mb-3">One-Click Approval</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed max-w-2xl">You receive a simple daily email digest. Click "Approve" and your Google profile is instantly updated. We handle the rest.</p>
+                    </div>
+                    
+                    <!-- Simple Approval UI Mockup -->
+                    <div class="w-full md:w-auto bg-surfaceLight/50 border border-slate-700 rounded-xl p-6 z-10 shadow-inner min-w-[250px] text-center">
+                        <div class="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h5 class="text-white font-semibold mb-1">Updates Ready</h5>
+                        <p class="text-slate-400 text-xs mb-4">Review your daily posts.</p>
+                        <button class="w-full bg-accent hover:bg-cyan-400 text-background font-bold py-2 px-4 rounded-lg transition-colors text-sm">Approve All</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="benefits" class="py-24 relative z-10 border-t border-white/5 bg-surface/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <div data-aos="fade-right">
+                    <h2 class="text-sm font-bold text-accent tracking-widest uppercase mb-3">The Advantage</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">An Active Google Profile <br><span class="text-gradient">Wins More Bids.</span></h3>
+                    <p class="text-slate-400 mb-10 text-lg leading-relaxed">Customers compare contractors online. A profile loaded with recent photos of high-quality work and fresh 5-star reviews instantly sets you apart from the competition.</p>
+                    
+                    <div class="space-y-6 text-sm">
+                        <div class="flex items-center space-x-4 border border-slate-700/50 bg-surface p-4 rounded-xl">
+                            <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center text-primary font-bold text-xl">1</div>
+                            <div class="text-slate-300"><strong class="text-white">Build Immediate Trust.</strong> Show potential customers you are active and reliable.</div>
+                        </div>
+                        <div class="flex items-center space-x-4 border border-slate-700/50 bg-surface p-4 rounded-xl">
+                            <div class="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center text-accent font-bold text-xl">2</div>
+                            <div class="text-slate-300"><strong class="text-white">Stop Paying Agencies.</strong> Forget expensive marketing retainers. We automate the busywork.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abstract Data Visualization -->
+                <div class="glass-panel p-8 rounded-3xl border border-slate-700/50 relative" data-aos="fade-left" data-aos-delay="200">
+                    <h4 class="text-white font-bold mb-6 text-sm border-b border-white/10 pb-4 uppercase tracking-wider">The Cost of Doing Nothing</h4>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wide">
+                                <span>With MetricPrime</span>
+                                <span class="text-accent font-bold">Winning Bids</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-gradient-to-r from-primary to-accent h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wide">
+                                <span>Manual Updates</span>
+                                <span class="text-slate-300 font-bold">Sporadic Results</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-slate-500 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wide">
+                                <span>Doing Nothing</span>
+                                <span class="text-red-400 font-bold">Losing Jobs</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-red-500/50 h-2 rounded-full" style="width: 15%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-sm font-bold text-accent tracking-widest uppercase mb-3">Simple Pricing</h2>
+            <h3 class="text-3xl md:text-5xl font-bold text-white mb-16 tracking-tight" data-aos="fade-up">No Hidden Fees. No Contracts.</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <!-- Tier 1 -->
+                <div class="glass-panel p-8 rounded-3xl border border-slate-700/50 flex flex-col hover:border-slate-500 transition-all" data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="text-xl font-bold text-white mb-2">Core Setup</h4>
+                    <p class="text-slate-400 text-sm mb-6 h-10">Essential reputation management for a single location.</p>
+                    <div class="mb-8">
+                        <span class="text-4xl font-extrabold text-white">$99</span><span class="text-slate-500 font-medium">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow text-sm text-slate-300">
+                        <li class="flex items-center"><svg class="h-5 w-5 text-primary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 1 Google Location</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 text-primary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Field App: Review Requests</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 text-primary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> AI Review Auto-Responder</li>
+                    </ul>
+                    <a href="#" class="block w-full text-center bg-surface hover:bg-slate-800 text-white text-sm font-bold py-3 px-4 rounded-lg transition-colors border border-slate-700 mt-auto">Select Core</a>
+                </div>
+                
+                <!-- Tier 2 -->
+                <div class="relative glass-panel p-8 rounded-3xl border border-accent shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col md:-translate-y-4 bg-surfaceLight/40" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent text-background px-4 py-1 text-xs font-bold rounded-full uppercase tracking-widest">Most Popular</div>
+                    <h4 class="text-xl font-bold text-white mb-2">Automated Dominance</h4>
+                    <p class="text-slate-300 text-sm mb-6 h-10">Full hands-free content and review management.</p>
+                    <div class="mb-8">
+                        <span class="text-4xl font-extrabold text-white">$199</span><span class="text-accent/70 font-medium">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow text-sm text-white">
+                        <li class="flex items-center"><svg class="h-5 w-5 text-accent mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Up to 3 Google Locations</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 text-accent mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Field App: Review Requests</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 text-accent mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> AI Review Auto-Responder</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 text-accent mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> <span class="font-bold">Field App: Photo to Google Post</span></li>
+                    </ul>
+                    <a href="#" class="block w-full text-center bg-accent hover:bg-cyan-400 text-background text-sm font-bold py-3 px-4 rounded-lg transition-colors mt-auto shadow-[0_0_15px_rgba(6,182,212,0.4)]">Choose Dominance</a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="glass-panel p-8 rounded-3xl border border-slate-700/50 flex flex-col hover:border-slate-500 transition-all" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="text-xl font-bold text-white mb-2">Enterprise</h4>
+                    <p class="text-slate-400 text-sm mb-6 h-10">The ultimate digital footprint for large teams.</p>
+                    <div class="mb-8">
+                        <span class="text-3xl font-extrabold text-white block mt-2">Custom</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow text-sm text-slate-300">
+                        <li class="flex items-center"><svg class="h-5 w-5 text-primary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Unlimited Locations</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 text-primary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Full Pipeline Access</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 text-primary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Custom Q&A Generation</li>
+                    </ul>
+                    <a href="#" class="block w-full text-center bg-surface hover:bg-slate-800 text-white text-sm font-bold py-3 px-4 rounded-lg transition-colors border border-slate-700 mt-auto">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with Copyright & Legal Disclaimer -->
+    <footer class="border-t border-white/10 bg-background relative z-10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-8 pb-8 border-b border-white/5">
+                <div class="flex items-center space-x-3.5 mb-4 md:mb-0 opacity-80 hover:opacity-100 transition-opacity">
+                    <img src="MetricPrimeLogo.png" alt="MetricPrime Logo" class="h-10 w-auto object-contain filter invert">
+                    <span class="font-bold text-xl text-white tracking-tight">MetricPrime</span>
+                </div>
+                <p class="text-xs text-slate-400">
+                    &copy; 2026 MetricPrime. All rights reserved.
+                </p>
+            </div>
+
+            <!-- Legal Disclaimer Section -->
+            <div class="space-y-3 text-[11px] leading-relaxed text-slate-500 max-w-5xl mx-auto text-center md:text-left">
+                <p>
+                    <strong class="text-slate-400">Disclaimer:</strong> MetricPrime is an independent software and automation platform. MetricPrime is not affiliated with, associated with, authorized by, endorsed by, or in any way officially connected with Google LLC or any of its subsidiaries or affiliates. "Google" and "Google Business Profile" are registered trademarks of Google LLC.
+                </p>
+                <p>
+                    All automation tools, AI content generators, and reputation management workflows provided by MetricPrime are designed to assist business operators in managing public profile information. Specific results, search engine placement, map pack rankings, review volume, or revenue growth are not guaranteed and will vary based on individual market conditions, business operations, and geographic locations.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800,
+            offset: 50,
+            easing: 'ease-out-cubic',
+        });
+    </script>
+</body>
+</html>
